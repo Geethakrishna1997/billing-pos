@@ -24,3 +24,33 @@ export const setUsers=(data)=>{
         payload : data
     }
 }
+
+//get user details
+export const startGetUser=()=>{
+    return ((dispatch)=>{
+        axios.get('http://dct-billing-app.herokuapp.com/api/users/account',{
+            headers : {
+                "Authorization" :`Bearer ${localStorage.getItem( 'token')}`
+        }})
+        .then((resp)=>{
+            const res=resp.data
+            console.log('res',res)
+            dispatch(getuser(res))
+        })
+        .catch(err=>err.message)
+    })
+}
+
+export const getuser=(data)=>{
+    return {
+        type : 'GET_USER',
+        payload : data
+    }
+}
+
+//logout
+export const startClearStore=()=>{
+    return {
+        type : "CLEAR"
+    }
+}

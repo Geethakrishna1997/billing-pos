@@ -1,21 +1,31 @@
-import { Link, Route } from 'react-router-dom'
-// import './App.css';
-import Home from './components/Home';
-import Login from './components/Login';
-import Register from './components/Register';
+import './App.css';
+import { Container, Grid, Typography } from '@material-ui/core'
+import React,{ useState,useEffect } from 'react'
+import NavBar from './components/NavBar'
 
 function App() {
-  return (
-    <div className="App">
-      <Link to='/'>Home</Link>
-      <Link to='/users/register'>Register</Link>
-      <Link to='/users/login'>Login</Link>
+  const [ userLoggedIn, setUserLoggedIn ] = useState(false)
 
-      <Route path='/' component={Home} exact={true} />
-      <Route path='/users/register' component={Register} />
-      <Route path='/users/login' component={Login}  />
-      
-    </div>
+  const handleAuth=()=>{
+    setUserLoggedIn(!userLoggedIn)
+  }
+
+  useEffect(()=>{
+    if(localStorage.getItem('token')){
+      handleAuth()
+    }
+  },[])
+
+  return (
+    <>
+      <Container>
+        <Grid className="App">
+          {/* <Typography variant='h3'>POS Billing Application</Typography> */}
+          <NavBar userLoggedIn={userLoggedIn} handleAuth={handleAuth} />
+          
+        </Grid>
+      </Container>
+    </>
   );
 }
 

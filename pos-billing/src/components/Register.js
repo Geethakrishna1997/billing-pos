@@ -1,4 +1,8 @@
 import React,{ useState } from 'react'
+import '../App.css';
+import { Input,Button, Container, Grid } from '@material-ui/core'
+// import FormControlLabel from '@material-ui/core/FormControlLabel'
+import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import validator from 'validator'
 import { useDispatch } from 'react-redux'
 import { startSetUsers } from '../Actions/userAuth'
@@ -75,64 +79,93 @@ export default function Register(props){
     }
 
     return (
-        <div>
-            <h2>Register with us</h2>
+        <Container>
+            <Grid className='icon'>
+                <div className='icon_class'>
+                    <PersonAddIcon fontSize='large' />
+                </div>
+                <div className='text'>Register with us</div>
+            </Grid>
 
-            <form onSubmit={handleSubmit}>
-                <label>Username</label><br/>
+            <Grid className='row m-2'>
+                <form >
+                    {/* <label>Username</label><br/> */}
 
-                <input 
-                    type='text'
-                    value={userName}
-                    name='username'
-                    onChange={handleChange}
-                /><br/>
-                {formError.userName && <span>{formError.userName}</span>}<br/>
+                    <Input 
+                        type='text'
+                        value={userName}
+                        name='username'
+                        onChange={handleChange}
+                        placeholder='Enter username'
+                        variant='outlined'
+                        className='p-2'
+                    /><br/>
+                    {formError.userName && <span>{formError.userName}</span>}<br/>
 
-                <label>Email</label><br/>
+                    {/* <label>Email</label><br/> */}
 
-                <input 
-                    type='text'
-                    value={email}
-                    name='email'
-                    onChange={handleChange}
-                /><br/>
-                {formError.email && <span>{formError.email}</span>}<br/>
+                    <Input 
+                        type='email'
+                        value={email}
+                        name='email'
+                        onChange={handleChange}
+                        placeholder='enter email'
+                        variant='outlined'
+                        className='p-2'
 
-                <label>Password</label><br/>
+                    /><br/>
+                    {formError.email && <span>{formError.email}</span>}<br/>
 
-                <input 
-                    type='password'
-                    value={password}
-                    name='password'
-                    onChange={handleChange}
-                /><br/>
-                {formError.password && <span>{formError.password}</span>}<br/>
+                    {/* <label>Password</label><br/> */}
 
-                <label>BusinessName</label><br/>
+                    <Input 
+                        type='password'
+                        value={password}
+                        name='password'
+                        onChange={handleChange}
+                        placeholder='Enter password'
+                        variant='outlined'
+                        className='p-2'
 
-                <input 
-                    type='text'
-                    value={business}
-                    name='businessname'
-                    onChange={handleChange}
-                /><br/>
-                {formError.business && <span>{formError.business}</span>}<br/>
+                    /><br/>
+                    {formError.password && <span>{formError.password}</span>}<br/>
 
-                <label>Address</label><br/>
+                    {/* <label>BusinessName</label><br/> */}
 
-                <input 
-                    type='text'
-                    value={address}
-                    name='address'
-                    onChange={handleChange}
-                /><br/>
-                {formError.address && <span>{formError.address}</span>}
+                    <Input 
+                        type='text'
+                        value={business}
+                        name='businessname'
+                        onChange={handleChange}
+                        placeholder='Enter businessname'
+                        variant='outlined'
+                        className='p-2'
 
-                <input type='submit' value='Register' />
+                    /><br/>
+                    {formError.business && <span>{formError.business}</span>}<br/>
 
-            </form>
+                    {/* <label>Address</label><br/> */}
 
-        </div>
+                    <Input 
+                        type='text'
+                        value={address}
+                        name='address'
+                        onChange={handleChange}
+                        placeholder='Enter address'
+                        variant='outlined'
+                        className='p-2'
+
+                    /><br/>
+                    {formError.address && <span>{formError.address}</span>}
+
+                    <Button 
+                        onClick={handleSubmit} 
+                        variant='contained'
+                        color='primary'
+                        >Register</Button>
+
+                </form>
+            </Grid>
+        </Container>
     )
 }
