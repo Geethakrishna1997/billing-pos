@@ -1,4 +1,5 @@
 import axios from 'axios'
+import swal from 'sweetalert'
 
 export const startSetCustomers=(formData)=>{
     return ((dispatch)=>{
@@ -12,7 +13,8 @@ export const startSetCustomers=(formData)=>{
             if(Object.keys(res).includes('errors')){
                 console.log(res.message)
             }else{
-                alert(`${res.name} customer is added`)
+                // alert(`${res.name} customer is added`)
+                swal(`${res.name} customer is added`)
                 dispatch(setCustomers(res))                
             }             
         })
@@ -67,10 +69,10 @@ export const startdeletecustomer=(id)=>{
         .then((response)=>{
             const res=response.data
             console.log('remove',res)
-            // swal(`${result.title} notes is successfully removed`)
+            swal(`${res.name} customer is successfully removed`)
             dispatch(removeCustomer(id))
         })
-        .catch(err=>{alert(err.message)})
+        .catch(err=>{swal(err.message)})
     })
 }
 
@@ -92,7 +94,7 @@ export const startEditCustomer=(id ,formData)=>{
         })
         .then((response)=>{
             const result = response.data
-            // swal(`${result.title} product is successfully updated`)
+            swal(`${result.name} customer is successfully updated`)
             console.log('edit_data',result)
             dispatch(editCustomer(result))
         })

@@ -36,14 +36,21 @@ export default function ProductsContainer(){
             <Grid xs={12} style={{position: "relative", textAlign: "center"}}>
                 <Typography variant="h3">Products catelog</Typography>
             </Grid>
-            <Grid container directions = "row">
+            <Grid container directions = "row" >
+                
                 <Grid xs={12} sm={6}>
-                    <SearchProduct term={term} handleChange={handleChange} />
-                    <ProductForm />
+                    <Typography><ProductsList products={filteredProducts()} /></Typography>
                 </Grid>
-                <Grid style={{position: "relative", top: 30, textAlign: "center"}} xs={12} sm={6}>
-                <ProductsList products={filteredProducts()} />
+
+                <Grid xs={12} sm={6}>
+                    <Grid align="right">
+                        <Typography ><SearchProduct term={term} handleChange={handleChange} /></Typography>
+                    </Grid>
+                    <Grid >
+                    <Typography ><ProductForm /></Typography>
+                    </Grid>
                 </Grid>
+
             </Grid>
         </Container>
     )

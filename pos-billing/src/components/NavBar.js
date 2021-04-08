@@ -17,6 +17,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import ShowBill from './BillingDetails/ShowBill'
 // import IconButton from '@material-ui/core/IconButton';
 // import MenuIcon from '@material-ui/icons/Menu';
 
@@ -43,14 +44,16 @@ const NavBar=(props)=>{
                 <Toolbar>
                 
                     <Typography variant="h6" style={{flexGrow : 1}}>
-                        Pos Billing App
+                        POS - Billing
                     </Typography>
                     <Grid >
-                        <Button color="inherit" component={Link} to='/'>Home</Button>
+                        
                         {!userLoggedIn ? (
                             <>
+                            <Button color="inherit" component={Link} to='/'>Home</Button>
                             <Button color="inherit" component={Link} to='/register'>Register</Button>
                             <Button color="inherit" component={Link} to='/login'>Login</Button>
+                            
                             </>
                         ) : (
                             <>
@@ -86,6 +89,7 @@ const NavBar=(props)=>{
                 <Route path='/customers' component={CustomerContainer} />
                 <Route path='/billgenerator' component={BillContainer} />
                 <Route path='/dashboard' component={DashboardContainer} />
+                <Route path='/showbill' component={ShowBill} />
             </Grid>
         </Container>
     )

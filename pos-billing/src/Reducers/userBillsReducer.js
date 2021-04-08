@@ -5,6 +5,9 @@ export default function userBillsReducer(state=stateInitialValue,action){
         case 'GET_BILLS' : {
             return [...action.payload]
         }
+        case 'POST_BILL' : {
+            return [...state, {...action.payload}]
+        }
         case 'DEL_BILL' : {
             return state.filter(bill=>bill._id !== action.payload)
         }        

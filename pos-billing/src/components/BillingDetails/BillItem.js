@@ -1,10 +1,15 @@
-import { Button, Card, CardActionArea, CardActions, CardContent, Link, Typography, Grid } from '@material-ui/core'
-import React from 'react'
+import { Button, Card, CardActionArea, CardActions, CardContent, Typography, Grid } from '@material-ui/core'
+import React,{useState} from 'react'
+import { Link } from 'react-router-dom'
+import { jsPDF } from "jspdf"
 import { useSelector,useDispatch } from 'react-redux'
 import { startDeleteBill } from '../../Actions/bills'
+import ShowBill from './ShowBill'
 
 export default function BillItem(props){
-    const { _id,date,customer,lineItems,user,createdAt,updatedAt,total } = props
+    const [showBill, setShowBill] = useState(false)
+    const { _id,date,customer,lineItems,user,createdAt,updatedAt,total } = props    
+
     const dispatch=useDispatch()
     
     const billProducts=useSelector((state)=>{
@@ -26,13 +31,33 @@ export default function BillItem(props){
         dispatch(startDeleteBill(_id))
     }
 
+    const handleShowBill = () => {
+        setShowBill(!showBill)
+    }
+
+    const handleBill=()=>{
+        handleShowBill()
+    }
+
+    // const generatePdf=()=>{
+    //     let doc = new jsPDF("P","pt")
+    //     doc.text(280,20, "***Bill***")
+    //     doc.setFont('helvetica')
+    //     doc.text(20,60,`Customer_id: ${billCustomer.name}`)
+    //     doc.setFont('helvetica')
+    //     doc.text(20,80,`Date: ${date.slice(0,10)}`)
+    //     doc.text(20,100,`Order Details:`)
+                        
+    //     doc.save('bill.pdf')                       
+    // }
+
     return (
         <div>
             <Card>
                 <CardActionArea>
                     <CardContent>
                         <Typography>Customer Name : {billCustomer && billCustomer.name}</Typography>
-                        <Typography>Bill Date : {date}</Typography>
+                        <Typography>Bill Date : {date.slice(0,10)}</Typography>
                         <Grid item xs={12} style={{overflow : billProducts.length> 0 && 'scroll' ,maxHeight : '300px'}}>
                             {billProducts.map((prod,i)=>{
                                 return (
@@ -47,42 +72,40 @@ export default function BillItem(props){
                             Total : {total}<br/>
                         </Grid>
                     </CardContent>
+                    {/* {toggle ?(<div></div>) : (<div></div>)} */}
                     <CardActions>
                         <Button 
                             onClick={handleRemove}
                             variant="contained" 
                             color="secondary"    
                         >Del</Button>
-                        <Link>Genetare Bill</Link>
+
+                        <Button 
+                            onClick={handleBill}
+                            variant="contained" 
+                            color="secondary" >   
+                            <Link to='/showbill' >show bill</Link>
+                        </Button>
+                                {/* component={Link} 
+                                to={{
+                                    pathname:"/showbill",
+                                    id:_id
+
+                                }}  */}
+                                 {/* onClick={<ShowBill id={_id} 
+                                // date={date}
+                                // billCustomer={billCustomer}
+                                // billProducts={billProducts}
+                                // total={total}
+                            // />}
+                        >show bill</Button>
+                        {/* <Button
+                            onClick={generatePdf}
+                        >Genetare Bill</Button> */}
                     </CardActions>
                 </CardActionArea>
             </Card>
-            {/* <blockquote>
-                Customer Name : {billCustomer && billCustomer.name}<br/>
-                {/* Customer Phone : {billCustomer && billCustomer.phone}<br/> */}
-                {/* Bill Date : {date}
-                <ul>
-                {billProducts.map((prod,i)=>{
-                    return (
-                        <div key={i}>
-                            <li >
-                                Product name : {prod.name}<br/>
-                                Product Quantity : {prod.quantity}<br/>
-                                product Price : {prod.price}<br/>
-                                SubTotal : {prod.subTotal}<br/>
-                            </li>
-                        </div>
-                    )
-                })}
-                </ul>
-                Total : {total}<br/>
-                <Button 
-                    onClick={handleRemove}
-                    variant="contained" 
-                    color="secondary"    
-                >Del</Button>
-                <Link>Genetare Bill</Link>
-            </blockquote>  */}
+            
         </div>
     )
 }

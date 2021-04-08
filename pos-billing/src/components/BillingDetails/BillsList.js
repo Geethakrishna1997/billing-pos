@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useState,useEffect } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { startGetBills } from '../../Actions/bills'
 import BillItem from './BillItem'
 
 export default function BillList(){
+    
     const dispatch = useDispatch()
     
     const billsList = useSelector((state)=>{
@@ -18,13 +19,9 @@ export default function BillList(){
     return (
         <div>
             <h2>Total Bills - {billsList.length}</h2>
-            <ul>
                 {billsList.map((bill,i)=>{
-                    return <li key={i}>
-                        <BillItem key={bill._id} {...bill} />
-                    </li>
+                    return <BillItem key={bill._id} {...bill} />
                 })}
-            </ul>
         </div>
     )
 }

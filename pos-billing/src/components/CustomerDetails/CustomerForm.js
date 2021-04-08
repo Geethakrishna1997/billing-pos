@@ -66,18 +66,19 @@ export default function ProductForm(props){
         
     }
 
+
     return (
         <Container>
             <Grid container spacing={2}>
                 <Grid item xs={10} align="center">
-                    {name ? <Typography variant='h4' style={{position:"relative"}}>
+                    {name ? <Typography variant='h4' style={{position:"relative",color:"purple"}}>
                                 EditCustomer</Typography> : 
-                            <Typography variant='h4' style={{position:"relative"}}>
-                                Create Customer</Typography> }    
+                            <Typography variant='h4' style={{position:"relative",color:"purple"}}>
+                                Create Customer </Typography> }    
                 </Grid>
-                <Grid item xs={10} align="center">
+                <Grid item xs={12} align="center">
                     <form onSubmit={handleSubmit}>
-                    <Grid item xs={10} align="center">
+                    <Grid item xs={12} align="center">
                     <Typography variant='subtitle1'>Customer name</Typography>
                         <TextField 
                             size="small"
@@ -90,7 +91,7 @@ export default function ProductForm(props){
                         
                         <Typography variant='subtitle2' style={{color:"red"}}>{formError.name && <span>{formError.name}</span>}</Typography>
                     </Grid>
-                    <Grid item xs={10} align="center">
+                    <Grid item xs={12} align="center">
                         <Typography variant="subtitle1">Customer mobile</Typography>
                         <TextField
                             size="small"
@@ -103,7 +104,7 @@ export default function ProductForm(props){
                         
                         <Typography variant='subtitle2' style={{color:"red"}}>{formError.mobile && <span>{formError.mobile}</span>}</Typography>
                     </Grid>
-                    <Grid item xs={10} align="center">
+                    <Grid item xs={12} align="center">
                         <Typography>Customer email</Typography>
                         <TextField
                             size="small"
@@ -114,12 +115,20 @@ export default function ProductForm(props){
                             onChange ={handleChange}
                         /><br/>
                     </Grid>
-                    <Grid item xs={10} align="center">
+                    <Grid item xs={12} align="center">
                         <Button 
                             type="submit"
                             variant="contained"
                             color="primary"
                         >Save</Button>
+
+                        {handleToggle && 
+                            <Button onClick={handleToggle}
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            >cancel</Button>}
+
                     </Grid>
                     </form>
                 </Grid>

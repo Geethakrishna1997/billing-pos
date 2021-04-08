@@ -77,7 +77,7 @@ export default function BillForm(){
             'quantity' : quantity
         }
         dispatch(addItem(newItem))
-        console.log('lineItems', lineItems)
+        // console.log('lineItems', lineItems)
     }
 
     //decreasing quantity
@@ -106,7 +106,7 @@ export default function BillForm(){
                 'customer' : customer,
                 'lineItems' : lineItems                
             }
-            console.log('bill form',formData)
+            // console.log('bill form',formData)
             dispatch(startSetBills(formData))
             setDate('')
             setCustomer('')

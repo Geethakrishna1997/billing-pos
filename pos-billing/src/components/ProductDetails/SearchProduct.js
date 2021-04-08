@@ -7,9 +7,9 @@ export default function SearchProduct(props){
     return (
         <Container>
             <Grid xs={12} style={{position: "relative"}}>
-                <Grid>
-                    <Typography variant= "h5">Search Product</Typography>
-                </Grid>
+                {/* <Grid>
+                    <Typography variant= "h5" style={{color:"navy"}}>Search Product</Typography>
+                </Grid> */}
                 <Grid>
                     <input 
                         type='text'

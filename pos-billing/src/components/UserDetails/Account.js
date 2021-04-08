@@ -10,6 +10,8 @@ export default function Account(){
         return state.usersInfo
     })
 
+    // const date=userInfo.createdAt.slice(0,10)
+
     useEffect(() =>{
         dispatch(startGetUser())
     
@@ -19,13 +21,13 @@ export default function Account(){
         <Container>
             <Grid xs={12} style={{position: 'relative', top: 20}}>
                 <Grid >
-                    <Typography variant="h4">Account Info of {userInfo.username}</Typography>
+                    <Typography variant="h4" style={{color:"steelblue"}}>Account Info of {userInfo.username}</Typography>
                 </Grid>
                 <Grid xs={12} >
                     <Card>
                         <CardActionArea>
                             <CardContent>
-                                <Typography variant="subtitle1">UserId : {userInfo._id}</Typography>
+                                {/* <Typography variant="subtitle1">UserId : {userInfo._id}</Typography> */}
                                 <Typography variant="subtitle1">UserName : {userInfo.username}</Typography>
                                 <Typography variant="subtitle1">Email : {userInfo.email}</Typography>
                                 <Typography variant="subtitle1">Business name : {userInfo.businessName}</Typography>
@@ -34,12 +36,6 @@ export default function Account(){
 
                             </CardContent>
                         </CardActionArea>
-                        {/* <li>UserId : {userInfo._id}</li>
-                        <li>UserName : {userInfo.username}</li>
-                        <li>Email : {userInfo.email}</li>
-                        <li>Business name : {userInfo.businessName}</li>
-                        <li>Address : {userInfo.address}</li>
-                        <li>Business Established : {userInfo.createdAt}</li> */}
                         
                     </Card>
                 </Grid>

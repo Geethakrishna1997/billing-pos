@@ -22,7 +22,7 @@ export default function ProductForm(props){
           }
 
         // for price
-        if(price.trim().length === 0){
+        if(price.length === 0){
             error.price = "price cannot be blank "
           }       
     }
@@ -48,7 +48,7 @@ export default function ProductForm(props){
             }
             console.log('formData',formData)
             if(handleToggle){
-                console.log(id,formData)
+                // console.log(id,formData)
                 dispatch(startGetEdit(id,formData))
                 handleToggle()
             } else {
@@ -61,21 +61,14 @@ export default function ProductForm(props){
         }
         
     }
-    // <TextField 
-    //                         size="small" 
-    //                         style={{width:"300px"}}
-    //                         type='date'
-    //                         value={date} 
-    //                         placeholder='YYYY-MM-DD'
-    //                         onChange={handleDateChange}
-    //                     />
 
     return (
         <Container>
             <Grid xs={6} sm={6}>
-                {name ? <Typography variant='h4' style={{position:"relative"}}>EditProduct</Typography> : <Typography variant='h4' style={{position:"relative"}}>Create Product</Typography> }
+                {name ? <Typography variant='h4' style={{position:"relative",color:"purple"}}>EditProduct</Typography> : <Typography variant='h4' style={{position:"relative",color:"purple"}}>Create Product</Typography> }
                 <form onSubmit={handleSubmit}>
-                    <Typography variant='subtitle1'>ProductName</Typography>
+                <Grid align="center">
+                    <Typography variant='subtitle1' >ProductName</Typography>
                    
                     <TextField
                         size="small" 
@@ -85,27 +78,36 @@ export default function ProductForm(props){
                         name ='name'
                         onChange ={handleChange}
                     />
-                    
+                </Grid>
                     <Typography variant='subtitle2' style={{color:"red"}}>{formError.name &&<span>{formError.name}</span>}</Typography>
-
-                    <Typography variant="subtitle1">Product price</Typography>
-                   
-                    <TextField
-                        size="small" 
-                        style={{width:"300px"}}
-                        type ='text'
-                        value ={price}
-                        name ='price'
-                        onChange ={handleChange}
-                    />
-                    <Typography variant='subtitle2' style={{color:"red"}}>{formError.price && <span>{formError.price}</span>}</Typography>
-
-                    {/* <input type='submit' value='save' /> */}
-                    <Button 
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                    >Save</Button>
+                    <Grid align="center">
+                        <Typography variant="subtitle1">Product price</Typography>
+                    
+                        <TextField
+                            size="small" 
+                            style={{width:"300px"}}
+                            type ='text'
+                            value ={price}
+                            name ='price'
+                            onChange ={handleChange}
+                        />
+                        <Typography variant='subtitle2' style={{color:"red"}}>{formError.price && <span>{formError.price}</span>}</Typography>
+                    </Grid>
+                    <Grid align="center">
+                        <Button 
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                        >Save</Button>
+                        
+                        {handleToggle && 
+                            <Button onClick={handleToggle}
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            >cancel</Button>}
+                    </Grid>
+                    
 
                 </form>    
             </Grid>

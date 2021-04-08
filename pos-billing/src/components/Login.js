@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import '../App.css';
 import validator from 'validator'
-import { Input,Button } from '@material-ui/core'
+import { Input,Button,Typography, Grid, Card, CardActionArea, CardContent, GridListTileBar } from '@material-ui/core'
+import ArrowForwardSharpIcon from '@material-ui/icons/ArrowForwardSharp'
 import PersonIcon from '@material-ui/icons/Person'
+import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
 
 export default function Login(props){
   const { handleAuth } = props
@@ -55,9 +58,11 @@ export default function Login(props){
       .then((response) =>{
         const res=response.data
         if(res.hasOwnProperty('errors')){ //Objects.keys(res).includes('errors')          
-          alert(res.errors)
+          // alert(res.errors)
+          swal({title : res.errors,icon :'error'})
         }else{
-          alert('successfully logged in')
+          // alert('successfully logged in')
+          swal({title : 'successfully logged in', icon : 'success'})
         //   console.log(res.token)
           localStorage.setItem('token',res.token)
           props.history.push('/')
@@ -78,12 +83,22 @@ export default function Login(props){
 
   return  (
       <div className='icon'>
+        <Grid container direction="row">
+        <Grid xs={12} sm={6} align="center">
+
+              <Typography variant='h4'>Login credentials:</Typography>
+              <Typography variant='subtitle1'>Email id: krishna02@gmail.com</Typography>
+              <Typography variant='subtitle1'>Password: krishna@02</Typography>
+        </Grid>
+
+        <Grid xs={12} sm={6} align="center">
         <div className='icon_class'>
-          <PersonIcon fontSize='large' />
+          <PersonIcon fontSize='large'/>
         </div>
         <div className='text'>Login</div>
 
         <div className='row m-2'>
+          
           <form >
 
             <Input 
@@ -94,7 +109,7 @@ export default function Login(props){
               name="email"
               variant='outlined'
             /><br/>
-            {formError.email && <span>{formError.email}</span>}<br/>
+            <Typography variant='subtitle2' style={{color:"red"}}>{formError.email && <span>{formError.email}</span>}</Typography>
 
 
             <Input 
@@ -105,15 +120,23 @@ export default function Login(props){
               variant='outlined'
               name="password"
             /><br/>
-            {formError.password && <span>{formError.password}</span>}<br/>
+            <Typography variant='subtitle2' style={{color:"red"}}>{formError.password && <span>{formError.password}</span>}</Typography>
 
             <Button 
               onClick={handleSubmit} 
               variant='contained'
               color='primary'
               >Login</Button>
+
+            <Grid>
+              <Link to="/register" variant="body2">
+                       Don't have an account? Sign up
+              </Link>
+            </Grid>
           </form>
         </div>
+        </Grid>
+        </Grid>
       </div>
     )
   }

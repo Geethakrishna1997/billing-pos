@@ -4,6 +4,7 @@ import CustomerForm from '../CustomerDetails/CustomerForm'
 import CustomersList from './CustomersList'
 import { startGetCustomers } from '../../Actions/customers'
 import SearchCustomer from './SearchCustomer'
+import { Container, Grid, Typography } from '@material-ui/core'
 
 export default function CustomerContainer(){
     const [term,setTerm] = useState('')
@@ -31,11 +32,23 @@ export default function CustomerContainer(){
     }
 
     return (
-        <div>
-            <h2>My Customers</h2>
-            <SearchCustomer term={term} handleChange={handleChange} />
-            <CustomerForm />
-            <CustomersList list={filteredCustomers()} />
-        </div>
+            <Container >
+                <Grid xs={12} style={{position: "relative", textAlign: "center"}} >
+                    <Typography variant="h3">Customers Catelog</Typography>
+                </Grid>
+                <Grid container directions = "row">
+                    <Grid style={{position: "relative", top: 30}} xs={12} sm={6}>
+                        <Typography><CustomersList list={filteredCustomers()} /></Typography>
+                    </Grid>
+                    <Grid xs={12} sm={6}>
+                        <Grid align="right">
+                            <Typography><SearchCustomer term={term} handleChange={handleChange} /></Typography>
+                        </Grid>
+                        <Grid>
+                            <Typography><CustomerForm /></Typography>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Container>            
     )
 }

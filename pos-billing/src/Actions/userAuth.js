@@ -1,4 +1,5 @@
 import axios from 'axios'
+import swal from 'sweetalert'
 
 export const startSetUsers=(formData,navigate)=>{
     return ((dispatch)=>{
@@ -6,9 +7,11 @@ export const startSetUsers=(formData,navigate)=>{
         .then((resp)=>{
             const res=resp.data
             if(res.hasOwnProperty('errors')){
-                alert(res.message)
+                // alert(res.message)
+                swal({title : res.message ,icon : 'error'})
             } else {
-                alert('successfully created an account')
+                // alert('successfully created an account')
+                swal({title : 'successfully created an account',icon : 'success'})
                 dispatch(setUsers(res))
                 navigate('/login')
             }
@@ -34,10 +37,10 @@ export const startGetUser=()=>{
         }})
         .then((resp)=>{
             const res=resp.data
-            console.log('res',res)
+            // console.log('res',res)
             dispatch(getuser(res))
         })
-        .catch(err=>err.message)
+        .catch(err=>console.log(err.message))
     })
 }
 

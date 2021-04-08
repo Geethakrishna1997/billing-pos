@@ -1,11 +1,12 @@
 import React,{ useState } from 'react'
 import '../App.css';
-import { Input,Button, Container, Grid } from '@material-ui/core'
+import { Input,Button, Container, Grid, Typography } from '@material-ui/core'
 // import FormControlLabel from '@material-ui/core/FormControlLabel'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import validator from 'validator'
 import { useDispatch } from 'react-redux'
 import { startSetUsers } from '../Actions/userAuth'
+import { Link } from 'react-router-dom';
 
 export default function Register(props){
     const dispatch = useDispatch()
@@ -89,7 +90,7 @@ export default function Register(props){
 
             <Grid className='row m-2'>
                 <form >
-                    {/* <label>Username</label><br/> */}
+                    <Grid item xs={10} align='center'>
 
                     <Input 
                         type='text'
@@ -100,9 +101,8 @@ export default function Register(props){
                         variant='outlined'
                         className='p-2'
                     /><br/>
-                    {formError.userName && <span>{formError.userName}</span>}<br/>
-
-                    {/* <label>Email</label><br/> */}
+                    <Typography variant='subtitle2' style={{color:"red"}}>{formError.userName && <span>{formError.userName}</span>}</Typography>
+                    </Grid>
 
                     <Input 
                         type='email'
@@ -114,9 +114,7 @@ export default function Register(props){
                         className='p-2'
 
                     /><br/>
-                    {formError.email && <span>{formError.email}</span>}<br/>
-
-                    {/* <label>Password</label><br/> */}
+                    <Typography variant='subtitle2' style={{color:"red"}}>{formError.email && <span>{formError.email}</span>}</Typography>
 
                     <Input 
                         type='password'
@@ -128,9 +126,7 @@ export default function Register(props){
                         className='p-2'
 
                     /><br/>
-                    {formError.password && <span>{formError.password}</span>}<br/>
-
-                    {/* <label>BusinessName</label><br/> */}
+                    <Typography variant='subtitle2' style={{color:"red"}}>{formError.password && <span>{formError.password}</span>}</Typography>
 
                     <Input 
                         type='text'
@@ -142,7 +138,7 @@ export default function Register(props){
                         className='p-2'
 
                     /><br/>
-                    {formError.business && <span>{formError.business}</span>}<br/>
+                    {/* <Typography variant='subtitle2' style={{color:"red"}}>{formError.business && <span>{formError.business}</span>}</Typography> */}
 
                     {/* <label>Address</label><br/> */}
 
@@ -156,13 +152,19 @@ export default function Register(props){
                         className='p-2'
 
                     /><br/>
-                    {formError.address && <span>{formError.address}</span>}
+                    {/* <Typography variant='subtitle2' style={{color:"red"}}>{formError.address && <span>{formError.address}</span>}</Typography> */}
 
                     <Button 
                         onClick={handleSubmit} 
                         variant='contained'
                         color='primary'
                         >Register</Button>
+
+                    <Grid>
+                        <Link to="/login" variant="body2">
+                                Already have an account? login
+                        </Link>
+                    </Grid>
 
                 </form>
             </Grid>

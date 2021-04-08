@@ -1,24 +1,26 @@
-import React, { useState } from 'react'
+import { Grid, Typography } from '@material-ui/core'
+import React from 'react'
 import ProductItem from './ProductItem'
 
 export default function ProductsList(props){ 
     const { products } = props
     
    return (
-        <div>
-            <h2>My Products - {products.length}</h2>
-            
-            <ul>
+        <Grid container >
+            <Grid item >
+                <Typography variant="h4" style={{color:"green"}}>My Products - {products.length}</Typography>
+            </Grid>
+
+            <Grid item >
+                <Typography>
                 {products.map(prod =>{
-                    return <li key={prod._id}>
-                        <ProductItem 
+                    return <ProductItem 
+                            key={prod._id}
                             {...prod} 
-                            // removeProduct={removeProduct}
-                        />
-                        
-                    </li>
+                        />                      
                 })}
-            </ul>
-        </div>
+                </Typography>
+            </Grid>
+        </Grid>
     )
 }

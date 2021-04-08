@@ -1,4 +1,5 @@
 import axios from 'axios'
+import swal from 'sweetalert'
 
 // post bill
 export const startSetBills=(formData)=>{
@@ -10,6 +11,7 @@ export const startSetBills=(formData)=>{
         .then((response)=>{
             const res=response.data
             // console.log('post bill',res)
+            swal(`successfully generated bill`)
             dispatch(setBill(res))
         })
         .catch(err=>alert(err.message))
@@ -35,7 +37,7 @@ export const startGetBills=()=>{
         })
         .then((response)=>{
             const res=response.data
-            console.log('get bills',res)
+            // console.log('get bills',res)
             dispatch(getBills(res))
         })
         // .catch(err=>alert(err.message))
@@ -60,7 +62,8 @@ export const startDeleteBill=(id)=>{
         })
         .then(response=>{
             const res=response.data
-            console.log('del bill', res)
+            // console.log('del bill', res)
+            swal(`successfully deleted bill`)
             dispatch(deleteBill(res))
         })
     })

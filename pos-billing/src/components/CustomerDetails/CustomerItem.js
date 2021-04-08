@@ -1,6 +1,8 @@
 import { Button, Card, CardActionArea, CardActions, CardContent, Grid, Typography } from '@material-ui/core'
 import React,{ useState } from 'react'
 import { useDispatch } from 'react-redux'
+import DeleteIcon from '@material-ui/icons/Delete'
+import EditIcon from '@material-ui/icons/Edit';
 import { startdeletecustomer } from '../../Actions/customers'
 import EditCustomer from './EditCustomer'
 
@@ -13,7 +15,7 @@ export default function CustomerItem( props ){
     const removeCustomer=(id)=>{
         dispatch(startdeletecustomer(id))
     }
-
+    
     const handleToggle =()=>{
         setToggle(!toggle)
     }
@@ -29,39 +31,28 @@ export default function CustomerItem( props ){
                         email={email}
                         handleToggle={handleToggle} 
                     />
-                    <button onClick={handleToggle}>cancel</button>
                 </div>
                 ) : (
                 <>
-                <Grid item xs={4} >
+                <Grid item xs={12} >
                     <Card>
                         <CardActionArea>
                             <CardContent>
-                                <Typography>customer Id - {_id}</Typography>
-                                <Typography>customer name - {name}</Typography>
-                                <Typography>customer mobile - {mobile}</Typography>
-                                <Typography>customer email - {email}</Typography>
-                                <Typography>user Id - {user}</Typography>
-                                <Typography>createdAt - {createdAt}</Typography>
-                                <Typography>updatedAt - {updatedAt}</Typography>
+                                {/* <Typography>customer Id - {_id}</Typography> */}
+                                <Typography variant="subtitle1">customer name - {name}</Typography>
+                                <Typography variant="subtitle1">customer mobile - {mobile}</Typography>
+                                <Typography variant="subtitle1">customer email - {email}</Typography>
+                                {/* <Typography>user Id - {user}</Typography> */}
+                                {/* <Typography>createdAt - {createdAt}</Typography> */}
+                                {/* <Typography>updatedAt - {updatedAt}</Typography> */}
 
                             </CardContent>
                             <CardActions>
-                                <Button color="secondary" onClick={()=>{removeCustomer(_id)}}>DEL</Button>
-                                <Button color="#ff3d00" onClick={handleToggle}>Edit</Button>
+                                <Button variant="contained" color="secondary" onClick={()=>{removeCustomer(_id)}}><DeleteIcon/></Button>
+                                <Button variant="contained" color="inherit" onClick={handleToggle}><EditIcon/></Button>
                             </CardActions>
                         </CardActionArea>  
-                    </Card>
-                    {/* customer Id - {_id}<br/>
-                    customer name - {name}<br/>
-                    customer mobile - {mobile}<br/>
-                    customer email - {email}<br/>
-                    user Id - {user}<br/>
-                    createdAt - {createdAt}<br/>
-                    updatedAt - {updatedAt}<br/>  
-                    
-                    <Button color="secondary" onClick={()=>{removeCustomer(_id)}}>DEL</Button>
-                    <Button color="#ff3d00" onClick={handleToggle}>Edit</Button> */}
+                    </Card>                    
                 </Grid>
                 </>
                 )

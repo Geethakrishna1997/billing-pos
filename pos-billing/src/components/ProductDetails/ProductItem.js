@@ -1,3 +1,7 @@
+import { Button, Card, CardActionArea, CardActions, CardContent, Grid, Typography } from '@material-ui/core'
+import IconButton from '@material-ui/core/IconButton'
+import DeleteIcon from '@material-ui/icons/Delete'
+import EditIcon from '@material-ui/icons/Edit';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { startdeleteproduct } from '../../Actions/products'
@@ -27,20 +31,36 @@ export default function ProductItem( props ){
                         price={price}
                         handleToggle={handleToggle} 
                     />
-                    <button onClick={handleToggle}>cancel</button>
                 </div>
             ) : (
-                <blockquote>
-                    Product Id : {_id}<br/>
-                    Product name : {name}<br/>
-                    Product price : {price}<br/>
-                    User Id : {user}<br/>
-                    Created At : {createdAt}<br/>
-                    Updated At : {updatedAt}
-                    <button onClick={()=>{removeProduct(_id)}}>DEL</button>
-                    <button onClick={handleToggle}>Edit</button>
-            </blockquote>
-            )}            
+            <Grid xs={12}>
+                <Card>
+                    <CardActionArea>
+                        <CardContent>
+                            <Typography variant="subtitle1">Product name : {name}</Typography>
+                            <Typography variant="subtitle1">Product price : {price}</Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Button
+                                
+                            // ><IconButton 
+                                onClick={()=>{removeProduct(_id)}}
+                                variant="contained" 
+                                color="secondary"
+                                aria-label="delete">
+                            <DeleteIcon />
+                          {/* </IconButton> */}
+                          </Button>
+                            <Button
+                                onClick={handleToggle}
+                                variant="contained" 
+                                color="inherit"
+                            ><EditIcon/></Button>
+                        </CardActions>
+                    </CardActionArea>
+                </Card>
+            </Grid>
+            )}                        
         </div>
     )
 }
