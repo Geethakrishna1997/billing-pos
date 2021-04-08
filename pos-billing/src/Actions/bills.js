@@ -60,12 +60,14 @@ export const startDeleteBill=(id)=>{
                 "Authorization" : `Bearer ${localStorage.getItem('token')}`
             }
         })
-        .then(response=>{
+        .then((response)=>{
+            console.log("id",id)
             const res=response.data
-            // console.log('del bill', res)
+            console.log('del bill', res)
             swal(`successfully deleted bill`)
             dispatch(deleteBill(res))
         })
+        .catch((err)=>{alert(err.message)})
     })
 }
 
