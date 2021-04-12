@@ -1,44 +1,42 @@
-import React,{useState,useEffect} from 'react' 
+import React from 'react' 
 import axios from 'axios'
-import {useSelector, useDispatch} from 'react-redux'
-// import {removeCusObj, removeBillProd} from '../../actions/billProdAction'
-// import {removeBillTotal} from '../../actions/billTotalAction'
+import { useSelector,useDispatch } from 'react-redux'
 import PrintIcon from '@material-ui/icons/Print';
 import {Card, CardActionArea, CardActions, CardContent, Button, Typography} from '@material-ui/core';
 import {Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/core';
 
 export default function ShowBill(props){
-    const [bill, setBill] = useState({}) 
-    // let dispatch = useDispatch()
-    // const {_id,date,billCustomer,billProducts,total,handleShowBill} = props
-    const {id} = props
-   console.log('props',props)
+    
+    const printBill=useSelector((state)=>{
+        return state.bill
+    })
+    console.log("bill",printBill)
+
+    const billProducts=useSelector((state)=>{
+        const newProducts=[]
+        for(const item of printBill.lineItems){
+            const temp=state.products.find(p=>p._id === item.product)
+            newProducts.push({...temp,...item})
+        }
+        return newProducts
+    })
+    // console.log('billProduct',billProducts)
+
+    const billCustomer=useSelector((state)=>{        
+        return state.customers.find(c=>c._id === printBill.customer)
+    })
+    // console.log('billCustomer',billCustomer)
 
     const handleBtn = () => {
-       
-        props.history.push('/billgenerator')
+       props.history.push('/billgenerator')
     }
-
-    useEffect(()=>{
-        axios.get(`http://dct-billing-app.herokuapp.com/api/bills/${id}`,{
-            headers : {
-                "Authorization" : `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-        .then((response)=>{
-            const res=response.data
-            console.log('billobj',res)
-            setBill(res)
-        })
-        .catch(err=>alert(err.message))
-    },[])
 
     return (
         <div>
             
            <Typography variant="h4" align="center" style={{ color : 'teal'}}>Bill INVOICE</Typography> 
           
-           {/* <Card  elevation={10}>
+           <Card  elevation={10}>
            <CardActionArea>
                         <CardContent>
                           <Typography gutterBottom variant="h5" component="h2">
@@ -53,10 +51,10 @@ export default function ShowBill(props){
                             <Table border="2" size="small">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Name</TableCell>
-                                        <TableCell>Quantity</TableCell>
-                                        <TableCell>Price(in ₹)</TableCell>
-                                        <TableCell>Total price(in ₹)</TableCell>
+                                        <TableCell variant='h5'>Name</TableCell>
+                                        <TableCell variant='h5'>Quantity</TableCell>
+                                        <TableCell variant='h5'>Price(in ₹)</TableCell>
+                                        <TableCell variant='h5'>Total price(in ₹)</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -75,7 +73,7 @@ export default function ShowBill(props){
                             
                          
                           <Typography variant="h5" align="right"  component="h3">
-                            <b>Total: ₹{total}</b>
+                            <b>Total: ₹{printBill.total}</b>
                           </Typography>
                           <Typography align="center" variant="body2"  color="textPrimary" component="p">
                              Note: Products once sold cannot be returned!
@@ -96,10 +94,7 @@ export default function ShowBill(props){
                                Print Bill
                            </Button>
                       </CardActions>
-                     </Card>  */}
-                     <Button variant="contained" color="secondary"  onClick={handleBtn}>
-                            back
-                           </Button>
+                     </Card>
         </div>
     )     
 }

@@ -6,6 +6,7 @@ import userProductsReducer from '../Reducers/userProductsReducer'
 import userCustomersReducer from '../Reducers/userCustomersReducer'
 import userBillsReducer from '../Reducers/userBillsReducer'
 import lineItemsReducer from '../Reducers/lineItemsReducer'
+import showBillReducer from '../Reducers/showBillReducer'
 
 const ConfigureStore=()=>{
     const store=createStore(combineReducers({
@@ -14,7 +15,8 @@ const ConfigureStore=()=>{
         products : userProductsReducer,
         customers : userCustomersReducer,
         bills : userBillsReducer,
-        lineItems : lineItemsReducer
+        lineItems : lineItemsReducer,
+        bill : showBillReducer
     }),applyMiddleware(thunk))
     return store
 }

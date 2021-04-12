@@ -1,13 +1,12 @@
 import { Button, Card, CardActionArea, CardActions, CardContent, Typography, Grid } from '@material-ui/core'
 import React,{useState} from 'react'
 import { Link } from 'react-router-dom'
-import { jsPDF } from "jspdf"
+// import { jsPDF } from "jspdf"
 import { useSelector,useDispatch } from 'react-redux'
 import { startDeleteBill } from '../../Actions/bills'
-import ShowBill from './ShowBill'
+import { startGetBill } from '../../Actions/showBill'
 
 export default function BillItem(props){
-    const [showBill, setShowBill] = useState(false)
     const { _id,date,customer,lineItems,user,createdAt,updatedAt,total } = props    
 
     const dispatch=useDispatch()
@@ -31,13 +30,9 @@ export default function BillItem(props){
         dispatch(startDeleteBill(_id))
     }
 
-    const handleShowBill = () => {
-        setShowBill(!showBill)
-    }
-
-    const handleBill=()=>{
-        handleShowBill()
-    }
+    const handleBill = () => {
+        dispatch(startGetBill(_id))
+    }    
 
     // const generatePdf=()=>{
     //     let doc = new jsPDF("P","pt")
@@ -72,7 +67,6 @@ export default function BillItem(props){
                             Total : {total}<br/>
                         </Grid>
                     </CardContent>
-                    {/* {toggle ?(<div></div>) : (<div></div>)} */}
                     <CardActions>
                         <Button 
                             onClick={handleRemove}
@@ -86,22 +80,6 @@ export default function BillItem(props){
                             color="secondary" >   
                             <Link to='/showbill' >show bill</Link>
                         </Button>
-                                {/* component={Link} 
-                                to={{
-                                    pathname:"/showbill",
-                                    id:_id
-
-                                }}  */}
-                                 {/* onClick={<ShowBill id={_id} 
-                                // date={date}
-                                // billCustomer={billCustomer}
-                                // billProducts={billProducts}
-                                // total={total}
-                            // />}
-                        >show bill</Button>
-                        {/* <Button
-                            onClick={generatePdf}
-                        >Genetare Bill</Button> */}
                     </CardActions>
                 </CardActionArea>
             </Card>
